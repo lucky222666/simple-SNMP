@@ -1,0 +1,85 @@
+CY-SNMP DEFINITIONS ::=BEGIN
+
+IMPORTS
+    MODULE-IDENTITY, Integer32,
+    Counter32, IpAddress, mib-2        FROM SNMPv2-SMI
+    PhysAddress                        FROM SNMPv2-TC
+    MODULE-COMPLIANCE, OBJECT-GROUP    FROM SNMPv2-CONF;
+
+
+cySNMP MODULE-IDENTITY
+    LAST-UPDATED "202105080000C"
+    ORGANIZATION "Wanggong GB_Sir Working Group"
+    CONTACT-INFO
+            "        Keith McCloghrie
+
+             Postal: Cisco Systems, Inc.
+                     170 West Tasman Drive
+                     San Jose, CA  95134-1706
+                     US
+
+             Phone:  +1 408 526 5260
+             Email:  kzm@cisco.com"
+
+    DESCRIPTION
+            "The MIB module for managing IP and ICMP implementations,
+            but excluding their management of IP routes."
+    REVISION      "9103310000Z"
+    DESCRIPTION
+            "The initial revision of this MIB module was part of MIB-
+            II."
+    ::= { cysnmp-1 }
+--version 1  模块说明
+
+--sys作为父节点，一定要给编号
+sys 	  OBJECT IDENTIFIER ::= { 1 }
+
+--the sysinfo group 
+sysinfo       OBJECT IDENTIFIER ::= { sys 1 }
+
+sysname 	  OBJECT-TYPE
+    SYNTAX      IA5String
+    DESCRIPTION
+            "The name of this host.We can get this information by cmd uname -n."
+    ::= { sysinfo 1 }
+
+
+--the cpu group 
+cpuinfo        OBJECT IDENTIFIER ::= { sys 2 }
+
+cpu_5    OBJECT-TYPE
+    SYNTAX      REAL
+    DESCRIPTION
+            "This defines the utility of cpu in fore 5 seconds."
+    ::= { cpuinfo 1 }
+
+cpu_10    OBJECT-TYPE
+    SYNTAX      REAL
+    DESCRIPTION
+            "This defines the utility of cpu in fore 10 seconds."
+    ::= { cpuinfo 2 }
+
+cpu_30    OBJECT-TYPE
+    SYNTAX      REAL
+    DESCRIPTION
+            "This defines the utility of cpu in fore 30 seconds."
+    ::= { cpuinfo 3 }
+
+
+--the mem group 
+meminfo            OBJECT IDENTIFIER ::= { sys 3 }
+
+memtotal     OBJECT-TYPE
+    SYNTAX      INTEGER
+    DESCRIPTION
+            "The measure unit is KB.It defines the total memory of this host."
+    ::= { meminfo 1 }
+
+memfree     OBJECT-TYPE
+    SYNTAX      INTEGER
+    DESCRIPTION
+            "The measure unit is KB.It defines the free memory of this host."
+    ::= { meminfo 2 }
+
+  
+END
